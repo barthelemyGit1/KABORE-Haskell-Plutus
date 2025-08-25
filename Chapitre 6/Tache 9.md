@@ -2,8 +2,6 @@
 
 Implémente une fonction qui applique une fonction à chaque élément d’une liste (comme map).
 
-Parfait 😄 On va recréer notre propre version de **`map`** en Haskell, en utilisant la récursion.
-
 ---
 
 ### Code Haskell
