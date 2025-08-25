@@ -1,34 +1,66 @@
-## HC1T1 - Tâche 1 : Composition de fonctions
+## HC4T1 - Tâche 1 : Définir une fonction weatherReport
 
-double : Multiplie un nombre par 2.
+Créer une fonction weatherReport :: String -> String qui prend une condition météo (par exemple, « sunny », « rainy », « cloudy ») et retourne un message décrivant le temps.
 
-increment : Augmente un nombre de 1.
+Utiliser le pattern matching pour traiter les cas suivants :
 
-doubleThenIncrement : Utilise la composition de fonctions pour appliquer double puis increment.
+« sunny » → « Il fait beau et ensoleillé ! »
 
-```
--- Multiplie un nombre par 2
-double :: Int -> Int
-double x = x * 2
+« rainy » → « N'oublie pas ton parapluie ! »
 
--- Augmente un nombre de 1
-increment :: Int -> Int
-increment x = x + 1
+« cloudy » → « Un peu gris, mais pas de pluie pour l'instant ! »
 
--- Utilise la composition de fonctions : d'abord double, puis increment
-doubleThenIncrement :: Int -> Int
-doubleThenIncrement = increment . double
-```
+Toute autre entrée doit retourner « Météo inconnue ».
 
-✅ Explication :
+---
 
-* `double x` → multiplie `x` par 2.
-* `increment x` → ajoute 1 à `x`.
-* `increment . double` → signifie "appliquer `double`, puis appliquer `increment`".
-
-👉 Exemple en GHCi :
+### Code Haskell
 
 ```haskell
-doubleThenIncrement 3
--- Résultat : 7   (car (3*2) + 1 = 7)
+-- Fonction qui renvoie un message selon la météo
+weatherReport :: String -> String
+weatherReport "sunny"  = "Il fait beau et ensoleillé !"
+weatherReport "rainy"  = "N'oublie pas ton parapluie !"
+weatherReport "cloudy" = "Un peu gris, mais pas de pluie pour l'instant !"
+weatherReport _        = "Météo inconnue"
+
+-- Fonction principale
+main :: IO ()
+main = do
+    input = "sunny"               -- Affecte la valeur sunny a la variable input
+    let report = weatherReport input -- Appeler la fonction pure
+    putStrLn report                 -- Afficher le résultat
 ```
+---
+
+### Explications
+
+1. **La fonction `weatherReport`**
+
+   ```haskell
+   weatherReport :: String -> String
+   ```
+
+   * Elle prend une chaîne (`String`) en entrée et renvoie une chaîne (`String`) en sortie.
+   * **Pattern matching** :
+
+     * `"sunny"` → `"Il fait beau et ensoleillé !"`.
+     * `"rainy"` → `"N'oublie pas ton parapluie !"`.
+     * `"cloudy"` → `"Un peu gris, mais pas de pluie pour l'instant !"`.
+     * `_` (underscore) → correspond à **toute autre valeur** → `"Météo inconnue"`.
+
+   👉 C’est une fonction **pure** : pas d’entrées/sorties, résultat toujours déterminé par l’entrée.
+
+2. **La fonction `main`**
+
+   ```haskell
+   main :: IO ()
+   ```
+
+   * `IO ()` : type des fonctions principales qui font des entrées/sorties.
+   * `putStrLn "..."` : affiche un message à l’écran.
+   * `getLine` : attend que l’utilisateur entre du texte et le retourne sous forme de `String`.
+   * `let report = weatherReport input` : on passe l’entrée à la fonction pure.
+   * `putStrLn report` : affiche le message correspondant.
+
+---
