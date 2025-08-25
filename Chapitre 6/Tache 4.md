@@ -1,56 +1,60 @@
-## HC6T5 : Inverser une liste (récursif)
+## HC6T4 : Produit des éléments avec foldl
 
-Implémente une fonction qui inverse une liste en utilisant la récursion.
+Implémente une fonction qui calcule le produit des éléments d’une liste en utilisant foldl.
 
 ---
 
 ### Code Haskell
 
 ```haskell
--- Fonction récursive pour inverser une liste
-reverseList :: [a] -> [a]
-reverseList []     = []                 -- Cas de base : liste vide
-reverseList (x:xs) = reverseList xs ++ [x] -- Cas récursif
+-- Produit des éléments avec foldl
+productList :: [Int] -> Int
+productList = foldl (*) 1
 
 -- Fonction principale pour tester
 main :: IO ()
 main = do
-    print $ reverseList [1,2,3,4,5]      -- [5,4,3,2,1]
-    print $ reverseList ["a","b","c"]    -- ["c","b","a"]
-    print $ reverseList  ([] :: [String])  -- []
+    print $ productList [1,2,3,4,5]    -- 120
+    print $ productList []             -- 1
+    print $ productList [2,3,4]        -- 24
 ```
 
 ---
 
 ### Explications
 
-1. **Cas de base**
+1. **`foldl`**
 
    ```haskell
-   reverseList [] = []
+   foldl (*) 1 [1,2,3,4,5]
    ```
 
-   * Une **liste vide** inversée est toujours vide.
+   * `foldl` prend **une fonction binaire**, un **accumulateur initial**, et une **liste**.
+   * Ici :
 
-2. **Cas récursif**
+     * Fonction : `(*)`
+     * Accumulateur initial : `1`
+     * Liste : `[1,2,3,4,5]`
+   * Évaluation : `((((1*1)*2)*3)*4)*5 = 120`
 
-   ```haskell
-   reverseList (x:xs) = reverseList xs ++ [x]
-   ```
+2. **Cas de liste vide**
 
-   * `x:xs` : `x` est le premier élément, `xs` est le reste de la liste.
-   * On inverse récursivement `xs`, puis on ajoute `x` à la **fin**.
+   * La multiplication sur une liste vide retourne `1` (élément neutre de `*`).
 
 3. **Pureté**
 
-   * La fonction est **pure** : dépend uniquement de l’entrée.
+   * La fonction `productList` est **pure**, dépend uniquement de sa liste d’entrée.
 
 ---
 
 ### Exemple de sortie
 
 ```
-[5,4,3,2,1]
-["c","b","a"]
-[]
+120
+1
+24
 ```
+
+---
+
+Si tu veux, je peux te montrer **la version équivalente avec `foldr`** et expliquer la différence subtile entre `foldr` et `foldl`. Veux‑tu que je fasse ça ?
