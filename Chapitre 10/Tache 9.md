@@ -20,8 +20,8 @@ instance MinMax Int where
 -- Exemples d'utilisation
 main :: IO ()
 main = do
-  putStrLn ("Valeur minimale Int : " ++ show minValue)
-  putStrLn ("Valeur maximale Int : " ++ show maxValue)
+  putStrLn ("Valeur minimale Int : " ++ show (minValue :: Int))
+  putStrLn ("Valeur maximale Int : " ++ show (maxValue :: Int))
 ```
 
 ---
