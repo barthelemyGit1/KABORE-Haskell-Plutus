@@ -20,8 +20,8 @@ instance Summable Int where
 -- Exemples d'utilisation
 main :: IO ()
 main = do
-  print (sumUp [1,2,3,4,5])  -- 15
-  print (sumUp [])           -- 0
+  print (sumUp [1,2,3,4,5] :: Int )  -- 15
+  print (sumUp [] :: Int)           -- 0
 ```
 
 ---
